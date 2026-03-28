@@ -5,7 +5,7 @@ import MovieCardHorizontal from './movieCardHorizontal'
 import MovieCardCompact from './movieCardCompact'
 
 export default function MovieGrid({ movies, isLoading }) {
-  const [layout, setLayout] = useState('grid') // 'grid', 'horizontal', 'compact'
+  const [layout, setLayout] = useState('grid') '
 
   if (isLoading) {
     return (
