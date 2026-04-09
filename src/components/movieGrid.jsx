@@ -5,7 +5,7 @@ import MovieCardHorizontal from './movieCardHorizontal'
 import MovieCardCompact from './movieCardCompact'
 
 export default function MovieGrid({ movies, isLoading }) {
-  const [layout, setLayout] = useState('grid') '
+  const [layout, setLayout] = useState('grid') 
 
   if (isLoading) {
     return (
@@ -53,7 +53,7 @@ export default function MovieGrid({ movies, isLoading }) {
         return (
           <div className="space-y-4">
             {movies.map((movie) => (
-              <MovieCardHorizontal key={movie.imdbID} movie={movie} />
+              <MovieCardHorizontal key={movie.id} movie={movie} />
             ))}
           </div>
         )
@@ -61,7 +61,7 @@ export default function MovieGrid({ movies, isLoading }) {
         return (
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
             {movies.map((movie) => (
-              <MovieCardCompact key={movie.imdbID} movie={movie} />
+              <MovieCardCompact key={movie.id} movie={movie} />
             ))}
           </div>
         )
@@ -69,7 +69,7 @@ export default function MovieGrid({ movies, isLoading }) {
         return (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {movies.map((movie) => (
-              <MovieCard key={movie.imdbID} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
         )

@@ -2,7 +2,7 @@ import { Play, Heart, Search, Star } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-r from-primary via-secondary to-primary text-white py-20 text-center relative overflow-hidden">
+    <section className="bg-gradient-to-r from-primary via-secondary to-primary text-black py-20 text-center relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10">
@@ -21,7 +21,7 @@ export default function Hero() {
 
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <div className="flex justify-center mb-6">
-          <div className="flex items-center gap-2 bg-white bg-opacity-10 px-4 py-2 rounded-full">
+          <div className="flex items-center gap-2 bg-green-500 text-white bg-opacity-10 px-4 py-2 rounded-full">
             <Play className="w-6 h-6 text-accent" />
             <span className="text-sm font-medium">Now Playing</span>
           </div>
@@ -34,8 +34,8 @@ export default function Hero() {
           Explore thousands of movies and series. Save your favorites and get personalized recommendations.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="bg-accent hover:bg-red-600 px-8 py-3 rounded-lg font-bold text-lg transition flex items-center gap-2">
+        <div className="flex bg-gray-500 flex-col sm:flex-row gap-4 justify-center items-center">
+          <button className=" hover:bg-red-600 px-8 py-3 rounded-lg font-bold text-lg transition flex items-center gap-2">
             <Play className="w-5 h-5" />
             Explore Now
           </button>

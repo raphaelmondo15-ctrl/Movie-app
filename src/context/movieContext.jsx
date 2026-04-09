@@ -6,7 +6,6 @@ export const MovieContext = createContext()
 export function MovieProvider({ children }) {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
 
@@ -32,8 +31,6 @@ export function MovieProvider({ children }) {
       value={{
         movies,
         isLoading,
-        searchQuery,
-        setSearchQuery,
         currentPage,
         setCurrentPage,
         totalPages,

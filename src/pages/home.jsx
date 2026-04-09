@@ -26,7 +26,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className='bg-gray-500'>
       <Hero />
       <div className="mt-12">
         {trendingLoading ? (

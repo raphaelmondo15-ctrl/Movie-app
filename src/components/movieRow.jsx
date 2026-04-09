@@ -8,13 +8,13 @@ export default function MovieRow({ title, movies }) {
         <div className="flex gap-4 min-w-min">
           {movies?.map((movie) => (
             <div
-              key={movie.imdbID}
+              key={movie.id}
               className="flex-shrink-0 w-40 group cursor-pointer"
             >
               <div className="relative h-56 rounded-lg overflow-hidden">
                 <img
-                  src={movie.Poster && movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/200x300?text=No+Image'}
-                  alt={movie.Title}
+                  src={movie.poster && movie.poster !== 'N/A' ? movie.poster : 'https://via.placeholder.com/200x300?text=No+Image'}
+                  alt={movie.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition flex items-center justify-center">
@@ -22,7 +22,7 @@ export default function MovieRow({ title, movies }) {
                 </div>
               </div>
               <p className="text-white font-semibold mt-2 truncate">
-                {movie.Title}
+                {movie.title}
               </p>
             </div>
           ))}
