@@ -1,63 +1,77 @@
-import { Play, Heart, Search, Star } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Info, Play, Star } from 'lucide-react'
 
-export default function Hero() {
+const fallbackDescription = 'Travel beyond the known world and discover a story worth watching tonight.'
+
+export default function Hero({ featuredMovie }) {
+  const title = featuredMovie?.title || 'Interstellar'
+  const description = featuredMovie?.plot && featuredMovie.plot !== 'N/A'
+    ? featuredMovie.plot
+    : fallbackDescription
+  const backgroundImage = featuredMovie?.backdrop && featuredMovie.backdrop !== 'N/A'
+    ? featuredMovie.backdrop
+    : featuredMovie?.poster && featuredMovie.poster !== 'N/A'
+      ? featuredMovie.poster
+      : ''
+  const detailsPath = featuredMovie ? `/movie/${featuredMovie.id}` : '/movies'
+
   return (
-    <section className="bg-gradient-to-r from-primary via-secondary to-primary text-black py-20 text-center relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10">
-          <Play className="w-16 h-16" />
+    <section className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] text-white shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+      {backgroundImage && (
+        <div className="absolute inset-0">
+          <img
+            src={backgroundImage}
+            alt={title}
+            className="h-full w-full object-cover object-center opacity-45"
+          />
         </div>
-        <div className="absolute top-20 right-20">
-          <Star className="w-12 h-12" />
-        </div>
-        <div className="absolute bottom-20 left-20">
-          <Heart className="w-14 h-14" />
-        </div>
-        <div className="absolute bottom-10 right-10">
-          <Search className="w-10 h-10" />
-        </div>
-      </div>
+      )}
 
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
-        <div className="flex justify-center mb-6">
-          <div className="flex items-center gap-2 bg-green-500 text-white bg-opacity-10 px-4 py-2 rounded-full">
-            <Play className="w-6 h-6 text-accent" />
-            <span className="text-sm font-medium">Now Playing</span>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(229,9,20,0.35),transparent_22%),linear-gradient(90deg,rgba(8,8,8,0.95)_0%,rgba(8,8,8,0.72)_42%,rgba(8,8,8,0.3)_72%,rgba(8,8,8,0.78)_100%)]" />
+      <div className="absolute inset-y-0 right-[10%] hidden w-[34vw] max-w-[400px] rounded-full border border-[#ff6a5f]/60 blur-[2px] md:block" />
+
+      <div className="relative z-10 flex min-h-[420px] items-end px-6 py-10 sm:px-8 md:min-h-[520px] md:px-12 md:py-14">
+        <div className="max-w-xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
+            <span className="text-[#e50914]">N</span>
+            Cinema Noir Originals
           </div>
-        </div>
 
-        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          Discover Your Next Favorite Movie
-        </h1>
-        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Explore thousands of movies and series. Save your favorites and get personalized recommendations.
-        </p>
+          <h1 className="max-w-lg text-5xl font-black uppercase leading-[0.88] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl">
+            {title}
+          </h1>
 
-        <div className="flex bg-gray-500 flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className=" hover:bg-red-600 px-8 py-3 rounded-lg font-bold text-lg transition flex items-center gap-2">
-            <Play className="w-5 h-5" />
-            Explore Now
-          </button>
-          <button className="border-2 border-white hover:bg-white hover:text-primary px-8 py-3 rounded-lg font-bold text-lg transition flex items-center gap-2">
-            <Heart className="w-5 h-5" />
-            View Favorites
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div className="flex justify-center gap-8 mt-12">
-          <div className="text-center">
-            <div className="text-2xl font-bold">10K+</div>
-            <div className="text-gray-300 text-sm">Movies</div>
+          <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white/75">
+            {featuredMovie?.year && featuredMovie.year !== 'N/A' && (
+              <span>{featuredMovie.year}</span>
+            )}
+            {featuredMovie?.rating && featuredMovie.rating !== 'N/A' && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1">
+                <Star className="h-3.5 w-3.5 fill-current text-[#f5c451]" />
+                {featuredMovie.rating}
+              </span>
+            )}
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold">500+</div>
-            <div className="text-gray-300 text-sm">Series</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold">4.8★</div>
-            <div className="text-gray-300 text-sm">Rating</div>
+
+          <p className="mt-5 max-w-md text-sm leading-6 text-white/78 sm:text-base">
+            {description}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to={detailsPath}
+              className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
+            >
+              <Play className="h-4 w-4 fill-current" />
+              Play
+            </Link>
+            <Link
+              to={detailsPath}
+              className="inline-flex items-center gap-2 rounded-md bg-white/18 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/28"
+            >
+              <Info className="h-4 w-4" />
+              More Info
+            </Link>
           </div>
         </div>
       </div>

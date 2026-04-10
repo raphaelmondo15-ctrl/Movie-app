@@ -4,6 +4,7 @@ import MainLayout from './layouts/mainLayout'
 import Home from './pages/home'
 import Movies from './pages/movies'
 import Series from './pages/series'
+import Popularpages from './pages/Popularpages'
 import Search from './pages/search'
 import Favorites from './pages/fav'
 import MovieDetails from './pages/movieDetails'
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/series" element={<Series />} />
+            <Route path="/popular" element={<Popularpages />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/movie/:id" element={<MovieDetails />} />

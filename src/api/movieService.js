@@ -1,10 +1,15 @@
 import axiosInstance from './axiosconfig'
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'
+const BACKDROP_BASE_URL = 'https://image.tmdb.org/t/p/original'
 const FALLBACK_TEXT = 'N/A'
 
 const getImageUrl = (path) => (
   path ? `${IMAGE_BASE_URL}${path}` : FALLBACK_TEXT
+)
+
+const getBackdropUrl = (path) => (
+  path ? `${BACKDROP_BASE_URL}${path}` : FALLBACK_TEXT
 )
 
 const getYear = (dateString) => (
@@ -42,6 +47,7 @@ const normalizeMovie = (movie) => ({
   title: movie.title || movie.name || FALLBACK_TEXT,
   year: getYear(movie.release_date || movie.first_air_date),
   poster: getImageUrl(movie.poster_path),
+  backdrop: getBackdropUrl(movie.backdrop_path),
   plot: movie.overview || FALLBACK_TEXT,
   rating: movie.vote_average ? movie.vote_average.toFixed(1) : FALLBACK_TEXT,
   runtime: formatRuntime(movie.runtime),
