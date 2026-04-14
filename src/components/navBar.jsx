@@ -5,8 +5,14 @@ import SearchBar from './searchBar'
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
+  const navItems = [
+    { label: 'Home', to: '/' },
+    { label: 'TV Shows', to: '/series' },
+    { label: 'Movies', to: '/movies' },
+    { label: 'New & Popular', to: '/popular' },
+    { label: 'My List', to: '/favorites' },
+  ]
 
-  // ✅ reusable style
   const linkStyle = ({ isActive }) =>
     isActive
       ? "underline text-accent"
@@ -25,11 +31,11 @@ export default function NavBar() {
           
           {/* DESKTOP MENU */}
           <div className="hidden md:flex gap-6 flex-1 ml-8">
-            <NavLink to="/" className={linkStyle}>Home</NavLink>
-            <NavLink to="/TVShows" className={linkStyle}>TV Shows</NavLink>
-            <NavLink to="/movies" className={linkStyle}>Movies</NavLink>
-            <NavLink to="/popular" className={linkStyle}>New & Popular</NavLink>
-            <NavLink to="/MyList" className={linkStyle}>My List</NavLink>
+            {navItems.map((item) => (
+              <NavLink key={item.to} to={item.to} className={linkStyle}>
+                {item.label}
+              </NavLink>
+            ))}
           </div>
 
           {/* SEARCH */}
@@ -59,11 +65,16 @@ export default function NavBar() {
         {/* MOBILE MENU */}
         {isOpen && (
           <div className="md:hidden pb-4 flex flex-col gap-3">
-            <NavLink to="/" className={linkStyle}>Home</NavLink>
-            <NavLink to="/TVShows" className={linkStyle}>TV Shows</NavLink>
-            <NavLink to="/movies" className={linkStyle}>Movies</NavLink>
-            <NavLink to="/popular" className={linkStyle}>New & Popular</NavLink>
-            <NavLink to="/MyList" className={linkStyle}>My List</NavLink>
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={linkStyle}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
             <SearchBar />
           </div>
         )}
