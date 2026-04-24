@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { Heart, Star, Play } from 'lucide-react'
+import { MyListContext } from '../context/mylistcontext'
 
 export default function MovieCardCompact({ movie }) {
-  const [isFavorite, setIsFavorite] = useState(false)
+  const { addToMyList, removeFromMyList, isInMyList } = useContext(MyListContext)
+  const isFavorite = isInMyList(movie.id)
   const imageUrl = movie.poster && movie.poster !== 'N/A'
     ? movie.poster
     : 'https://via.placeholder.com/200x300?text=No+Image'

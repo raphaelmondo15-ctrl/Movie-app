@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { MovieProvider } from './context/movieContext'
 import MainLayout from './layouts/mainLayout'
 import Home from './pages/home'
@@ -9,7 +9,6 @@ import Search from './pages/search'
 import Favorites from './pages/mylist'
 import MovieDetails from './pages/movieDetails'
 import TvShows from './pages/tvshows'
-import Mylist from './pages/mylist'
 import './App.css'
 
 function App() {
@@ -23,8 +22,8 @@ function App() {
             <Route path="/series" element={<TvShows />} />
             <Route path="/popular" element={<Popularpages />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/mylist" element={<Mylist />} />
+            <Route path="/favorites" element={<Navigate to="/mylist" replace />} />
+            <Route path="/mylist" element={<Favorites />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/tvshows" element={<TvShows />} />
           </Route>

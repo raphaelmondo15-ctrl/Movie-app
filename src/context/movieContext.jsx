@@ -6,8 +6,15 @@ export const MovieContext = createContext()
 export function MovieProvider({ children }) {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage')
+    return savedPage ? parseInt(savedPage, 10) : 1
+  })
   const [totalPages, setTotalPages] = useState(0)
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage)
+  }, [currentPage])
 
   useEffect(() => {
     const fetchMovies = async () => {
