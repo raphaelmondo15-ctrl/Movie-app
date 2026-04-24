@@ -7,7 +7,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
   const navItems = [
     { label: 'Home', to: '/' },
-    { label: 'TV Shows', to: '/series' },
+    { label: 'TV Shows', to: '/tvshows' },
     { label: 'Movies', to: '/movies' },
     { label: 'New & Popular', to: '/popular' },
     { label: 'My List', to: '/favorites' },

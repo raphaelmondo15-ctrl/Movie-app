@@ -118,6 +118,11 @@ export const getPopularMovies = async (page = 1) => {
   return formatListResponse(data)
 }
 
+export const getPopularTvShows = async (page = 1) => {
+  const data = await fetchFromTMDB('/tv/popular', { page })
+  return formatListResponse(data)
+}
+
 export const getTrendingMovies = async () => {
   const data = await fetchFromTMDB('/trending/movie/week')
   return {
