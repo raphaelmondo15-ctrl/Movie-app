@@ -27,13 +27,22 @@ export default function MovieCardCompact({ movie }) {
               <h3 className="text-white font-bold text-sm leading-tight mb-1 line-clamp-2">
                 {movie.title}
               </h3>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1">
                   <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
                   <span className="text-yellow-400 text-xs">{movie.rating || 'N/A'}</span>
                 </div>
                 <span className="text-white text-xs">{movie.year}</span>
               </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  isFavorite ? removeFromMyList(movie.id) : addToMyList(movie)
+                }}
+                className="w-full bg-accent hover:bg-red-600 text-white py-1 px-2 rounded text-xs font-medium transition"
+              >
+                {isFavorite ? "Remove" : "Add to My List"}
+              </button>
             </div>
           </div>
 
@@ -41,7 +50,7 @@ export default function MovieCardCompact({ movie }) {
           <button
             onClick={(e) => {
               e.preventDefault()
-              setIsFavorite(!isFavorite)
+              isFavorite ? removeFromMyList(movie.id) : addToMyList(movie)
             }}
             className="absolute top-2 right-2 bg-black bg-opacity-50 p-1.5 rounded-full hover:bg-opacity-75 transition z-10"
           >

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { Heart, Star, Play, Calendar, Clock } from 'lucide-react'
+import { MyListContext } from '../context/mylistcontext'
 
 export default function MovieCardHorizontal({ movie }) {
-  const [isFavorite, setIsFavorite] = useState(false)
+  const { addToMyList, removeFromMyList, isInMyList } = useContext(MyListContext)
+  const isFavorite = isInMyList(movie.id)
   const imageUrl = movie.poster && movie.poster !== 'N/A'
     ? movie.poster
     : 'https://via.placeholder.com/200x300?text=No+Image'
@@ -22,7 +24,7 @@ export default function MovieCardHorizontal({ movie }) {
             <button
               onClick={(e) => {
                 e.preventDefault()
-                setIsFavorite(!isFavorite)
+                isFavorite ? removeFromMyList(movie.id) : addToMyList(movie)
               }}
               className="absolute top-2 right-2 bg-black bg-opacity-50 p-1.5 rounded-full hover:bg-opacity-75 transition z-10"
             >
