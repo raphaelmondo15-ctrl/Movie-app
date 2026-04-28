@@ -36,10 +36,10 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="-mt-8 -mx-4 min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
+    <div className="-mt-8 w-full min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
       <Hero featuredMovie={featuredMovie} />
 
-      <div className="mx-auto mt-8 max-w-7xl space-y-10">
+      <div className="mx-auto mt-8 space-y-10">
         {trendingLoading || isLoading ? (
           <MovieSkeleton count={12} />
         ) : (

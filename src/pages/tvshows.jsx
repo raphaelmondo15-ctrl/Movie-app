@@ -39,7 +39,7 @@ const TvShows = () => {
     }
 
     return (
-        <div className="-mt-8 -mx-4 min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
+        <div className="-mt-8 w-full min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl space-y-6 pt-8">
                 <h1 className="text-4xl font-bold text-white">TV Shows</h1>
                 {errorMessage && (

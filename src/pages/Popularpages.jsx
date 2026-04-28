@@ -39,7 +39,7 @@ export default function Popularpages() {
   const [firstRow = [], secondRow = [], thirdRow = []] = chunkMovies(movies.slice(0, 18), 6)
 
   return (
-    <div className="-mt-8 -mx-4 min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
+    <div className="-mt-8 w-full min-h-screen bg-[#141414] px-4 pb-14 pt-0 text-white sm:px-6 lg:px-8">
       <Hero featuredMovie={featuredMovie} />
 
       <div className="mx-auto mt-8 max-w-7xl space-y-10">
