@@ -12,7 +12,7 @@ export default function MovieRow({ title, movies = [] }) {
       </div>
 
       <div className="overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex min-w-min gap-3 sm:gap-4">
+        <div className="flex w-max space-x-2 gap-3 sm:gap-4 mx-auto">
           {movies.map((movie) => {
             const imageUrl = movie.poster && movie.poster !== 'N/A' ? movie.poster : fallbackPoster
 
