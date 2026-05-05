@@ -1,59 +1,39 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { Heart, Star, Play } from 'lucide-react'
+import { useContext } from 'react'
+import { Heart } from 'lucide-react'
+import { MyListContext } from '../context/mylistcontext'
 
 export default function MovieCard({ movie }) {
-  const [isFavorite, setIsFavorite] = useState(false)
-  const imageUrl = movie.Poster && movie.Poster !== 'N/A'
-    ? movie.Poster
-    : 'https://via.placeholder.com/200x300?text=No+Image'
+  const { addToMyList, removeFromMyList, isInMyList } = useContext(MyListContext)
+  const isFavorite = isInMyList(movie.id)
+  const imageUrl = movie.poster && movie.poster !== 'N/A'
+    ? movie.poster
+    : 'https://via.placeholder.com/240x360?text=No+Image'
 
   return (
-    <Link to={`/movie/${movie.imdbID}`}>
-      <div className="bg-secondary rounded-lg overflow-hidden hover:scale-105 transition transform cursor-pointer shadow-lg group grid grid-rows-[auto_1fr_auto] h-full">
-        {/* Image Section */}
-        <div className="relative aspect-[2/3] overflow-hidden">
+    <Link
+      to={`/movie/${movie.id}`}
+      className="group block relative"
+    >
+      <article className="relative overflow-hidden rounded-md border border-white/8 bg-[#1b1b1b] shadow-[0_16px_30px_rgba(0,0,0,0.25)] transition duration-300 group-hover:-translate-y-1 group-hover:border-white/20">
+        <button
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            isFavorite ? removeFromMyList(movie.id) : addToMyList(movie)
+          }}
+          className="absolute right-3 top-3 z-20 rounded-full bg-black/60 p-2 text-white transition hover:bg-black"
+        >
+          <Heart className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`} />
+        </button>
+        <div className="aspect-[2/3] overflow-hidden">
           <img
             src={imageUrl}
-            alt={movie.Title}
-            className="w-full h-full object-cover"
+            alt={movie.title}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              setIsFavorite(!isFavorite)
-            }}
-            className="absolute top-2 right-2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition z-10"
-          >
-            <Heart className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`} />
-          </button>
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition flex items-center justify-center">
-            <Play className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition" />
-          </div>
         </div>
-
-        {/* Content Section */}
-        <div className="p-4 grid grid-rows-[auto_auto_1fr] gap-2 flex-1">
-          {/* Title */}
-          <h3 className="text-white font-bold text-sm leading-tight line-clamp-2">
-            {movie.Title}
-          </h3>
-
-          {/* Year */}
-          <p className="text-gray-400 text-xs">
-            {movie.Year}
-          </p>
-
-          {/* Rating and Details */}
-          <div className="grid grid-cols-[1fr_auto] items-center gap-2 mt-auto">
-            <div className="flex items-center gap-1">
-              <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 flex-shrink-0" />
-              <span className="text-yellow-400 text-xs font-medium">{movie.imdbRating || 'N/A'}</span>
-            </div>
-            <span className="text-accent text-xs font-medium">View</span>
-          </div>
-        </div>
-      </div>
+      </article>
     </Link>
   )
 }

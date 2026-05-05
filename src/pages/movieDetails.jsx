@@ -37,16 +37,16 @@ export default function MovieDetails() {
   }
 
   // Generate YouTube search URL for movie trailer
-  const trailerUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${movie.Title} ${movie.Year} official trailer`)}`
+  const trailerUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${movie.title} ${movie.year} official trailer`)}`
 
   return (
     <div className="text-white">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Movie Poster */}
         <div className="lg:col-span-1">
-          <img
-            src={movie.Poster && movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Image'}
-            alt={movie.Title}
+            <img
+            src={movie.poster && movie.poster !== 'N/A' ? movie.poster : 'https://via.placeholder.com/300x450?text=No+Image'}
+            alt={movie.title}
             className="w-full rounded-lg shadow-lg"
           />
 
@@ -62,28 +62,28 @@ export default function MovieDetails() {
 
         {/* Movie Details */}
         <div className="lg:col-span-2">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{movie.Title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{movie.title}</h1>
 
           {/* Rating and Year */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex items-center gap-1">
               <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-              <span className="text-yellow-400 font-bold">{movie.imdbRating}/10</span>
+              <span className="text-yellow-400 font-bold">{movie.rating}/10</span>
             </div>
             <div className="flex items-center gap-1">
               <Calendar className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-300">{movie.Year}</span>
+              <span className="text-gray-300">{movie.year}</span>
             </div>
             <div className="flex items-center gap-1">
               <Clock className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-300">{movie.Runtime}</span>
+              <span className="text-gray-300">{movie.runtime}</span>
             </div>
           </div>
 
           {/* Plot */}
           <div className="mb-6">
             <h2 className="text-2xl font-bold mb-3">Plot</h2>
-            <p className="text-gray-300 leading-relaxed">{movie.Plot}</p>
+            <p className="text-gray-300 leading-relaxed">{movie.plot}</p>
           </div>
 
           {/* Movie Info Grid */}
@@ -94,9 +94,9 @@ export default function MovieDetails() {
                 Cast & Crew
               </h3>
               <div className="space-y-2">
-                <p><strong>Director:</strong> {movie.Director}</p>
-                <p><strong>Writer:</strong> {movie.Writer}</p>
-                <p><strong>Actors:</strong> {movie.Actors}</p>
+                <p><strong>Director:</strong> {movie.director}</p>
+                <p><strong>Writer:</strong> {movie.writer}</p>
+                <p><strong>Actors:</strong> {movie.actors}</p>
               </div>
             </div>
 
@@ -106,31 +106,31 @@ export default function MovieDetails() {
                 Details
               </h3>
               <div className="space-y-2">
-                <p><strong>Genre:</strong> {movie.Genre}</p>
-                <p><strong>Language:</strong> {movie.Language}</p>
-                <p><strong>Country:</strong> {movie.Country}</p>
-                <p><strong>Rated:</strong> {movie.Rated}</p>
+                <p><strong>Genre:</strong> {movie.genres}</p>
+                <p><strong>Language:</strong> {movie.language}</p>
+                <p><strong>Country:</strong> {movie.country}</p>
+                <p><strong>Rated:</strong> {movie.rated}</p>
               </div>
             </div>
           </div>
 
           {/* Awards */}
-          {movie.Awards && movie.Awards !== 'N/A' && (
+          {movie.awards && movie.awards !== 'N/A' && (
             <div className="mb-6">
               <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Award className="w-5 h-5" />
                 Awards
               </h3>
-              <p className="text-gray-300">{movie.Awards}</p>
+              <p className="text-gray-300">{movie.awards}</p>
             </div>
           )}
 
           {/* Ratings */}
-          {movie.Ratings && movie.Ratings.length > 0 && (
+          {movie.ratings && movie.ratings.length > 0 && (
             <div className="mb-6">
               <h3 className="text-xl font-bold mb-3">Additional Ratings</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {movie.Ratings.map((rating, index) => (
+                {movie.ratings.map((rating, index) => (
                   <div key={index} className="bg-secondary p-3 rounded-lg">
                     <p className="font-semibold">{rating.Source}</p>
                     <p className="text-accent">{rating.Value}</p>

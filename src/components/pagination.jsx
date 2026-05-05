@@ -1,4 +1,4 @@
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
+ export default function Pagination({ currentPage, totalPages, onPageChange }) {
   return (
     <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
       <button

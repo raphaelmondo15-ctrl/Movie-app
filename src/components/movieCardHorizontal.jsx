@@ -1,28 +1,30 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { Heart, Star, Play, Calendar, Clock } from 'lucide-react'
+import { MyListContext } from '../context/mylistcontext'
 
 export default function MovieCardHorizontal({ movie }) {
-  const [isFavorite, setIsFavorite] = useState(false)
-  const imageUrl = movie.Poster && movie.Poster !== 'N/A'
-    ? movie.Poster
+  const { addToMyList, removeFromMyList, isInMyList } = useContext(MyListContext)
+  const isFavorite = isInMyList(movie.id)
+  const imageUrl = movie.poster && movie.poster !== 'N/A'
+    ? movie.poster
     : 'https://via.placeholder.com/200x300?text=No+Image'
 
   return (
-    <Link to={`/movie/${movie.imdbID}`}>
+    <Link to={`/movie/${movie.id}`}>
       <div className="bg-secondary rounded-lg overflow-hidden hover:scale-[1.02] transition transform cursor-pointer shadow-lg group">
         <div className="grid grid-cols-[120px_1fr] gap-4 p-4">
           {/* Poster Image */}
           <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
             <img
               src={imageUrl}
-              alt={movie.Title}
+              alt={movie.title}
               className="w-full h-full object-cover"
             />
             <button
               onClick={(e) => {
                 e.preventDefault()
-                setIsFavorite(!isFavorite)
+                isFavorite ? removeFromMyList(movie.id) : addToMyList(movie)
               }}
               className="absolute top-2 right-2 bg-black bg-opacity-50 p-1.5 rounded-full hover:bg-opacity-75 transition z-10"
             >
@@ -37,25 +39,25 @@ export default function MovieCardHorizontal({ movie }) {
           <div className="flex flex-col justify-between min-h-[120px]">
             <div>
               <h3 className="text-white font-bold text-lg leading-tight mb-2 line-clamp-2">
-                {movie.Title}
+                {movie.title}
               </h3>
 
               <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>{movie.Year}</span>
+                  <span>{movie.year}</span>
                 </div>
-                {movie.Runtime && (
+                {movie.runtime && (
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    <span>{movie.Runtime}</span>
+                    <span>{movie.runtime}</span>
                   </div>
                 )}
               </div>
 
-              {movie.Plot && (
+              {movie.plot && (
                 <p className="text-gray-300 text-sm line-clamp-2 mb-3">
-                  {movie.Plot}
+                  {movie.plot}
                 </p>
               )}
             </div>
@@ -63,7 +65,7 @@ export default function MovieCardHorizontal({ movie }) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1">
                 <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                <span className="text-yellow-400 text-sm font-medium">{movie.imdbRating || 'N/A'}</span>
+                <span className="text-yellow-400 text-sm font-medium">{movie.rating || 'N/A'}</span>
               </div>
               <span className="text-accent text-sm font-medium hover:text-red-400 transition">
                 View Details →
